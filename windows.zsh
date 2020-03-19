@@ -100,15 +100,11 @@ grid ()
 
 	#Monta a linha de comando do yad e executa e executa 
 	if [[ -n $tabs ]]; then #valida se é parte de um notebook
-		# grep -Ev '^$' <<< $(sed 's/|/\n/g' <<< $(<$file)) >| /tmp/fila$tabn
 		basedados=$(grep -Ev '^$' <<< $(sed 's/|/\n/g' <<< $(<$file)))
 		notebk="--tabnum=$tabn --plug=$key" #adicional para montar notebook
-		# zsh -c "$base $notebk $cols </tmp/fila$tabn" &
 		zsh -c "$base $notebk $cols" <<< "$basedados" &
 	else #caso seja um grid simples
-		# grep -Ev '^$' <<< $(sed 's/|/\n/g' <<< $(<$file)) >| /tmp/fila$text
 		basedados=$(grep -Ev '^$' <<< $(sed 's/|/\n/g' <<< $(<$file)))
-		# zsh -c "$base $cols </tmp/fila$text" &
 		zsh -c "$base $cols" <<< "$basedados" &
 	fi
 }
